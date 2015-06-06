@@ -15,6 +15,15 @@ app.config(function($stateProvider){
 });
 
 app.controller('TourCtrl', function($scope){
+
+	
+    $scope.mapOptions = {
+      center: new google.maps.LatLng(35.784, -78.670),
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+  
+
 	$scope.tourData = {
 		creator: 'hello',
 		name : 'Katrina Euro Trip',
