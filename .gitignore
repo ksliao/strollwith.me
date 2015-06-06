@@ -4,4 +4,6 @@ bower_components
 npm-debug.log
 public
 .DS_Store
+development.js
 apidata.js
+
