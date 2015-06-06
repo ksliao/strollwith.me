@@ -5,7 +5,7 @@ app.directive('gmap', function(){
 		require: 'ngModel',
 		templateUrl: 'js/common/directives/gmap/gmap.html',
 		link: function(scope, element, attribute){
-			console.dir(scope.plan);
+			
 			function openInfo(infowindow, map, marker){
 				return function(){
 					infowindow.open(map, marker);
@@ -15,6 +15,16 @@ app.directive('gmap', function(){
 			function closeInfo(infowindow, map, marker){
 				return function(){
 					infowindow.close();
+				}
+			}
+
+			function openDetails(marker){
+				return function(){
+					var markerPosition = marker.getPosition();
+					var markerCoords = {};
+					markerCoords.latitude = Math.round(markerPosition.A*1000000)/1000000;
+					markerCoords.longitude = Math.round(markerPosition.F*1000000)/1000000;
+					scope.$emit('slideShow', markerCoords);
 				}
 			}
 
@@ -44,7 +54,6 @@ app.directive('gmap', function(){
 
 				  	var marker = new google.maps.Marker({
 					    position: el,
-					    draggable: true,
 					    animation: google.maps.Animation.DROP,
 					    clickable: true,
 					    title:"Point " + index
@@ -54,7 +63,7 @@ app.directive('gmap', function(){
 						content: '<p>' + marker.title + '</p>'
 					});
 
-					google.maps.event.addListener(marker, 'click', openInfo(infowindow, map, marker));
+					google.maps.event.addListener(marker, 'click', openDetails(marker));
 					google.maps.event.addListener(marker, 'mouseover', openInfo(infowindow, map, marker));
 					google.maps.event.addListener(marker, 'mouseout', closeInfo(infowindow, map, marker));
 

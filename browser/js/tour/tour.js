@@ -25,9 +25,21 @@ app.controller('TourCtrl', function($scope){
 				longitude: -73.983912,
 				audioUrl : '',
 				imagesUrl : [
-					'',
-					'',
-					''
+					{
+						image: 'http://www.ripleys.com/wp-content/uploads/2013/11/Snoopybabe3-550x550.jpg',
+						active: false
+					},
+					{
+						image: 'http://holykaw.alltop.com/wp-content/uploads/2013/10/snoopybabe-cute-sad-cat-4-500x372.jpg',
+						active: false
+					},
+					{
+						image: 'https://s-media-cache-ak0.pinimg.com/736x/af/7f/a2/af7fa28b2eada5402933713b6399d08e.jpg',
+						active: false
+					}
+					// 'http://www.ripleys.com/wp-content/uploads/2013/11/Snoopybabe3-550x550.jpg',
+					// 'http://holykaw.alltop.com/wp-content/uploads/2013/10/snoopybabe-cute-sad-cat-4-500x372.jpg',
+					// 'https://s-media-cache-ak0.pinimg.com/736x/af/7f/a2/af7fa28b2eada5402933713b6399d08e.jpg'
 				]
 			},
 			{
@@ -35,19 +47,9 @@ app.controller('TourCtrl', function($scope){
 				longitude: -83.983912,
 				audioUrl : '',
 				imagesUrl : [
-					'',
-					'',
-					''
-				]
-			},
-			{
-				latitude: 60.701929,
-				longitude: -93.983912,
-				audioUrl : '',
-				imagesUrl : [
-					'',
-					'',
-					''
+					'http://urbanblog.pairsite.com/files/Boo_photo1.JPG',
+					'http://images5.fanpop.com/image/photos/31600000/Boo-Buddy-333-boo-and-buddy-31665381-960-720.jpg',
+					'http://images6.fanpop.com/image/photos/32500000/-boo-and-buddy-32578209-403-403.jpg'
 				]
 			},
 			{
@@ -68,7 +70,39 @@ app.controller('TourCtrl', function($scope){
 			latitude : el.latitude,
 			longitude : el.longitude
 		}
-	})
+	});
+
+	$scope.interval = 5000;
+	$scope.slides = $scope.tourData.points[0].imagesUrl;
+
+	$scope.$on('slideShow', function(event, data){
+		
+		$scope.POI = $scope.tourData.points.filter(function(points){
+			console.log('POINTS', points);
+			return (points.latitude === data.latitude && points.longitude === data.longitude);
+		});
+
+		$scope.images = $scope.POI[0].imagesUrl;
+		$scope.slides = $scope.images;
+		
+		// console.log('DATA', data);
+		// console.log('POI', $scope.POI);
+		// console.log('IMAGES', $scope.images);
+	});
+
+	// $scope.addSlide = function(imageUrl) {
+	// 	console.log('ADD IMAGE HERE');
+	//     var newWidth = 600 + slides.length + 1;
+	//     slides.push({
+	//       image: imageUrl + newWidth + '/300'
+	//       // text: ['More','Extra','Lots of','Surplus'][slides.length % 4] + ' ' +
+	//       //   ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
+	//     });
+	//   };
+	//   for (var i=0; i<4; i++) {
+	//     $scope.addSlide();
+	//   }
+
 });
 
 app.factory('TourFactory', function($http){

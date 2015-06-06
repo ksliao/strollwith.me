@@ -1,6 +1,14 @@
 <div>
-	<!-- <div id='map-canvas' gmap>
-	</div> -->
+  <div style="width: 66%;">
+    <carousel interval="interval">
+      <slide ng-repeat="slide in slides" active="slide.active">
+        <img ng-src="{{slide.image}}" style="margin:auto; height:100%">
+      </slide>
+    </carousel>
+  </div>
+</div>
+
+<div>
 	<gmap ng-model='plan'></gmap>
 	<style>
 		#map-canvas{
@@ -8,3 +16,4 @@
 		}
 	</style>
 </div>
+
