@@ -62,6 +62,13 @@ app.controller('TourCtrl', function($scope){
 			}
 		]
 	};
+
+	$scope.plan = $scope.tourData.points.map(function(el){
+		return {
+			latitude : el.latitude,
+			longitude : el.longitude
+		}
+	})
 });
 
 app.factory('TourFactory', function($http){
