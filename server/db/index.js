@@ -3,8 +3,15 @@ var Q = require('q');
 var path = require('path');
 var chalk = require('chalk');
 
+var cps = require('cps-api');
+var cpsData = require('./apidata');
+
+var cpsConn = new cps.Connection(cpsData.url, cpsData.dbName, cpsData.username, cpsData.password, "document", "document/id", cpsData.account);
+
+//mongo stuff
 var DATABASE_URI = require(path.join(__dirname, '../env')).DATABASE_URI;
 
+//mongo stuff
 var mongoose = require('mongoose');
 var db = mongoose.connect(DATABASE_URI).connection;
 
@@ -14,13 +21,16 @@ var db = mongoose.connect(DATABASE_URI).connection;
 require('./models/user');
 
 var startDbPromise = new Q(function (resolve, reject) {
-    db.on('open', resolve);
-    db.on('error', reject);
+    cpsConn.on('open', resolve);
+    cpsConn.on('error', reject);
 });
 
-console.log(chalk.yellow('Opening connection to MongoDB . . .'));
+console.log(chalk.yellow('Opening connection to Clusterpoint . . .'));
 startDbPromise.then(function () {
-    console.log(chalk.green('MongoDB connection opened!'));
+    console.log(chalk.green('Clusterpoint connection opened!'));
 });
 
-module.exports = startDbPromise;
+module.exports = {
+	startDbPromise: startDbPromise,
+	cpsConn : cpsConn
+};
