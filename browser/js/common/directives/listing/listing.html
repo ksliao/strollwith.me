@@ -1,8 +1,10 @@
 <div class='list-group'>
 	<a href='{{listing.id | prepend:"/tour/"}}' class='list-group-item'>
 		<h4 class='list-group-item-heading'>{{listing.name}}</h4>
-		<h5 class='list-group-item-text'>{{listing.creator}}</h5>
+		<p class='list-group-item-text'>{{listing.creator}}</p>
 		<p class='list-group-item-text'>{{listing.description}}</p>
 		<p class='list-group-item-text'>{{listing.price}}</p>
+
+		<button type="button" class="btn btn-primary" ng-click="addToCart(listing.id)">Add To Cart</button>
 	</a>
 </div>
