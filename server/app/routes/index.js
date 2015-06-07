@@ -5,6 +5,7 @@ module.exports = router;
 router.use('/tutorial', require('./tutorial'));
 router.use('/members', require('./members'));
 router.use('/tours', require('./tours'));
+router.use('/s3', require('./s3'));
 
 // Make sure this is after all of
 // the registered routes!
