@@ -7,45 +7,50 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('TourCtrl', function($scope){
+app.controller('TourCtrl', function($scope, TourFactory){
 	// var audio = document.getElementById('audio');
-	$scope.tourData = {
-		creator: 'hello',
-		name : 'Katrina Euro Trip',
-		description: 'It is awesome',
-		points : [
-			{
-				latitude: 40.701929,
-				longitude: -73.983912,
-				audioUrl : 'https://s3.amazonaws.com/angelhack2015-audio-tour/testaudio.mp3',
-				imagesUrl : [
-					'http://www.ripleys.com/wp-content/uploads/2013/11/Snoopybabe3-550x550.jpg',
-					'http://holykaw.alltop.com/wp-content/uploads/2013/10/snoopybabe-cute-sad-cat-4-500x372.jpg',
-					'https://s-media-cache-ak0.pinimg.com/736x/af/7f/a2/af7fa28b2eada5402933713b6399d08e.jpg'
-				]
-			},
-			{
-				latitude: 50.701929,
-				longitude: -83.983912,
-				audioUrl : 'https://s3.amazonaws.com/angelhack2015-audio-tour/testaudio2.mp3',
-				imagesUrl : [
-					'http://urbanblog.pairsite.com/files/Boo_photo1.JPG',
-					'http://images5.fanpop.com/image/photos/31600000/Boo-Buddy-333-boo-and-buddy-31665381-960-720.jpg',
-					'http://images6.fanpop.com/image/photos/32500000/-boo-and-buddy-32578209-403-403.jpg'
-				]
-			},
-			{
-				latitude: 60.701929,
-				longitude: -93.983912,
-				audioUrl : '',
-				imagesUrl : [
-					'',
-					'',
-					''
-				]
-			}
-		]
-	};
+	// $scope.tourData = {
+	// 	creator: 'hello',
+	// 	name : 'Katrina Euro Trip',
+	// 	description: 'It is awesome',
+	// 	points : [
+	// 		{
+	// 			latitude: 40.701929,
+	// 			longitude: -73.983912,
+	// 			audioUrl : 'https://s3.amazonaws.com/angelhack2015-audio-tour/testaudio.mp3',
+	// 			imagesUrl : [
+	// 				'http://www.ripleys.com/wp-content/uploads/2013/11/Snoopybabe3-550x550.jpg',
+	// 				'http://holykaw.alltop.com/wp-content/uploads/2013/10/snoopybabe-cute-sad-cat-4-500x372.jpg',
+	// 				'https://s-media-cache-ak0.pinimg.com/736x/af/7f/a2/af7fa28b2eada5402933713b6399d08e.jpg'
+	// 			]
+	// 		},
+	// 		{
+	// 			latitude: 50.701929,
+	// 			longitude: -83.983912,
+	// 			audioUrl : 'https://s3.amazonaws.com/angelhack2015-audio-tour/testaudio2.mp3',
+	// 			imagesUrl : [
+	// 				'http://urbanblog.pairsite.com/files/Boo_photo1.JPG',
+	// 				'http://images5.fanpop.com/image/photos/31600000/Boo-Buddy-333-boo-and-buddy-31665381-960-720.jpg',
+	// 				'http://images6.fanpop.com/image/photos/32500000/-boo-and-buddy-32578209-403-403.jpg'
+	// 			]
+	// 		},
+	// 		{
+	// 			latitude: 60.701929,
+	// 			longitude: -93.983912,
+	// 			audioUrl : '',
+	// 			imagesUrl : [
+	// 				'',
+	// 				'',
+	// 				''
+	// 			]
+	// 		}
+	// 	]
+	// };
+	//$scope.tourData = {};
+	TourFactory.findAllTours().then(function(tour){
+		console.log("WE HEREEEE", tour)
+		$scope.tourData = tour[0];
+	})
 
 	//show and hiding images and map view
 	$scope.show = false;
@@ -111,27 +116,27 @@ app.controller('TourCtrl', function($scope){
 app.factory('TourFactory', function($http){
 	return {
 		createTour : function(data){
-			return $http.post('/tours', data).then(function(response){
+			return $http.post('api/tours', data).then(function(response){
 				return response.data;
 			});
 		},
 		findTour : function(id){
-			return $http.get('/tours/' + id).then(function(response){
+			return $http.get('api/tours/' + id).then(function(response){
 				return response.data;
 			});
 		},
 		updateTour : function(id, data){
-			return $http.put('/tours/' + id, data).then(function(response){
+			return $http.put('api/tours/' + id, data).then(function(response){
 				return response.data;
 			});
 		},
 		deleteTour : function(id){
-			return $http.delete('/tours/'+ id).then(function(response){
+			return $http.delete('api/tours/'+ id).then(function(response){
 				return response.data;
 			});
 		},
 		findAllTours : function(){
-			return $http.get('/tours').then(function(response){
+			return $http.get('api/tours').then(function(response){
 				return response.data;
 			});
 		}

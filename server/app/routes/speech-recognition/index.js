@@ -12,11 +12,11 @@ router.get('/', function (req, res){
 	     method: 'POST',
 	     type: 'async',
 	     parameters: {
-	         file: 'myFileName'
+	         url: 'myUrl'
 	         // interval: //seconds
 	     },
-	     files: {
-	         myFileName: __dirname + '/hpnext.mp4' // See IDOL supported files.
+	     urls: {
+	         myUrl: "https://s3.amazonaws.com/angelhack2015-audio-tour/testaudio.mp3" // See IDOL supported files.
 	     }
 	 }).then(
 	     function(res){
@@ -38,4 +38,4 @@ router.get('/', function (req, res){
 
 });
 
-// https://api.idolondemand.com/1/job/status/usw3p_e972b818-17b6-4b80-afbe-407aa013af50?apikey=4ea45598-9ea2-4c4a-b11a-78e8ee81fae8
+// https://api.idolondemand.com/1/job/status/usw3p_ca1bbe93-9a75-49ca-9da9-fc36f6c2a8f0?apikey=4ea45598-9ea2-4c4a-b11a-78e8ee81fae8
