@@ -21,16 +21,16 @@ app.directive('sidepane', function(){
 				scope.$apply();
 			});
 
-			scope.$on('tourIsPlaying', function(){
+			scope.$on('tourIsPlayingS', function(){
 				scope.activatedButton = 'play';
 			});
 
-			scope.$on('tourIsPaused', function(){
+			scope.$on('tourIsPausedS', function(){
 				console.log('tour is paused');
 				scope.activatedButton = 'pause';
 			});
 
-			scope.$on('tourIsEnded', function(){
+			scope.$on('tourIsEndedS', function(){
 				console.log('tour is ended');
 				scope.activatedButton = 'stop';
 			});
