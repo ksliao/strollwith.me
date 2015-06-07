@@ -24,6 +24,7 @@ app.directive('gmap', function(){
 					var markerCoords = {};
 					markerCoords.latitude = Math.round(markerPosition.A*1000000)/1000000;
 					markerCoords.longitude = Math.round(markerPosition.F*1000000)/1000000;
+					console.log(markerCoords);
 					scope.$emit('slideShow', markerCoords);
 				}
 			}
@@ -38,7 +39,7 @@ app.directive('gmap', function(){
 				  var map = new google.maps.Map(document.getElementById('map-canvas'),
 				      mapOptions);
 
-				  var tourCoordinates = scope.plan.map(function(el){
+				  var tourCoordinates = scope.tourData.points.map(function(el){
 				  	return new google.maps.LatLng(el.latitude, el.longitude);
 				  });
 
