@@ -1,20 +1,26 @@
-<div>
-	<sidepane ng-model='tourData.points'></sidepane>
+<div class='tourDiv'>
+	<div class='row'>	
+		
+		<div class='col-md-8' ng-show='show'>
+			<carousel interval="interval">
+			  <slide ng-repeat="slide in slides">
+			    <img ng-src="{{slide}}" style="margin:auto; height:100%">
+			  </slide>
+			</carousel>
+		</div>
 
-  <div style="width: 66%;">
-    <carousel interval="interval">
-      <slide ng-repeat="slide in slides">
-        <img ng-src="{{slide}}" style="margin:auto; height:100%">
-      </slide>
-    </carousel>
-  </div>
+		<div class='col-md-8' ng-hide='show'>
+			<gmap ng-model='tourData.points'></gmap>
+		</div>
 
-  <gmap ng-model='tourData.points'></gmap>
-  
-	<style>
-		#map-canvas{
-			height: 100vh;
-		}
-	</style>
+		<div class='col-md-4'>
+			<button class='btn btn-default' ng-click='showPics()'>
+				<span ng-hide='show'>Show Images</span>
+				<span ng-show='show'>Show Map</span>
+			</button>
+			<sidepane ng-model='tourData.points'></sidepane>
+		</div>
+
+	</div>
 </div>
 
