@@ -1,14 +1,18 @@
 <nav class="navbar navbar-static-top">
-    <div class="container">
-        <div class="navbar-header">
-            <fullstack-logo></fullstack-logo>
-        </div>
+    <div class="navContainer">
         <ul class="nav navbar-nav">
+            <li>
+                <a><span class='glyphicon glyphicon-globe'></span></a>
+            </li>
             <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
                 <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
             </li>
         </ul>
-        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
+        <ul class='rightNav'>
+            <li>
+                <a ng-show="!user" ui-sref="login">Login</a>
+            </li>
+        </ul>
         <div ng-show="user" class="welcome">
             <span>Welcome, {{ user.email }}!</span>
             <a ng-click="logout()">Logout</a>
