@@ -7,6 +7,8 @@ app.directive('audiotour', function(){
 			stories : '=ngModel'
 		},
 		link: function(scope, element, attribute){
+			var audio = document.getElementById('audiotour');
+
 			scope.index = 0;
 			scope.playing = scope.stories[scope.index].audioUrl;
 
@@ -15,11 +17,11 @@ app.directive('audiotour', function(){
 			});
 
 			scope.$on('tourPause', function(event){
-				element.triggerHandler('pause');
+				audio.pause();
 			});
 
 			scope.$on('tourPlay', function(event){
-				element.triggerHandler('play');
+				audio.play();
 			});
 
 			scope.$on('tourNext', function(event){
@@ -27,6 +29,7 @@ app.directive('audiotour', function(){
 			});
 
 			scope.$on('tourRewind', function(event){
+				console.log('nextTour');
 				if(scope.index > 0) playAudio(scope.index - 1);
 			});
 
@@ -35,13 +38,21 @@ app.directive('audiotour', function(){
 				else playAudio(scope.index + 1);
 			});
 
-			element.on('play', function(){
-				scope.$emit('tourIsPlaying');
-			});
+			element.on('play', _.debounce(function(){
+					scope.$emit('tourIsPlaying');
+				}, 3000, {
+					leading: false,
+					trailing: true
+				})
+			);
 
-			element.on('pause', function(){
-				scope.$emit('tourIsPaused');
-			});
+			element.on('pause', _.debounce(function(){
+					scope.$emit('tourIsPaused');
+				}, 3000, {
+					leading : false,
+					trailing: true
+				})
+			);
 
 			function playAudio(index){
 				scope.index = index;
