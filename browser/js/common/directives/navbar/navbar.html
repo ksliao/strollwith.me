@@ -14,8 +14,20 @@
             </li>
         </ul>
         <div ng-show="user" class="welcome">
+            <div id="cart-count" class="pull-left" ng-controller="CartController">{{$root.cart}}</div>
+            <div id="shopping-cart" class="glyphicon glyphicon-shopping-cart text-right"></div>
             <span>Welcome, {{ user.email }}!</span>
             <a ng-click="logout()">Logout</a>
         </div>
     </div>
 </nav>
+<style type="text/css">
+    #cart-count {
+        color: white;
+    }
+    #shopping-cart {
+        color: white;
+        font-size: 30px;
+        padding-right: 10px;
+    }
+</style>

@@ -12,6 +12,9 @@
 		<p>{{description}}</p>
 		<p>{{showing.latitude}}, {{showing.longitude}}</p>
 	</div>
+	<div ng-controller="CartController">
+		<button type="button" class="btn btn-primary" ng-click="addToCart()">Add To Cart</button>
+	</div>
 	<div class='audiotext'>
 		<p ng-repeat='story in stories'>{{story.audioText}}</p>
 	</div>
