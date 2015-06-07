@@ -24,6 +24,12 @@ text-align: center;
 	margin-bottom: 40px;
 }
 
+.title{
+	font-family: 'Pacifico', cursive;
+	margin-bottom: 40px;
+	font-size: 6rem;
+}
+
 #turnglobe{
 	text-align: center;
 }
@@ -43,10 +49,9 @@ text-align: center;
 }
 
 .quote{
-	text-align: center;
 	margin: 0 auto;
 	width: 44%;
-	margin-top: 40px;
+	color: #44C0BF;
 }
 
 .left{
@@ -55,10 +60,7 @@ text-align: center;
 
 .right{
 	text-align: right;
-}
-
-#left-quote{
-	
+	float: right;
 }
 
 #right-quote{
@@ -69,9 +71,68 @@ text-align: center;
 section{
 	height: 100vh;
 	padding: 40px;
+	text-align: center;
 }
 
 #section-quote{
+	background: #363636;
+	color: white;
+}
+
+#section-team{
 	background: #44C0BF;
 	color: white;
+}
+
+.team{
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 40px;
+}
+
+.api{
+	display: inline-block;
+	margin-right: 20px;
+	margin-top: 20px;
+	img{
+		max-width: 230px;
+		margin: 20px;
+	}
+}
+
+.member{
+	display: inline-block;
+	margin-right: 20px;
+	margin-top: 20px;
+	img{
+		max-width: 230px;
+		border-radius: 50%;
+	}
+}
+
+.blue{
+	color: #44C0BF;	
+}
+
+.section-content{
+	margin-top: 5%;
+}
+
+.about{
+	padding: 15px;
+	width: 80%;
+	margin: 0 auto;
+}
+
+.center{
+	text-align: center;
+	margin: 0 auto;
+}
+
+.detail{
+	width: 50%;
+	// padding: 25px;
+	margin: 0 auto;
+	margin-left: 140px;
+	color: #f5f5f5;
 }
