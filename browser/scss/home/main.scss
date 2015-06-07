@@ -1,16 +1,43 @@
+body{
+	background: #f5f5f5;
+}
+
 #home {
+text-align: center;
+
   fullstack-logo {
     padding-top: 30px;
     width: 150px;
     margin: 0 auto;
+    
   }
   h1 {
     margin-top: 40px;
-    text-align: center;
   }
 }
 
 .mainTitle{
 	font-family: 'Pacifico', cursive;
-	// font-family: 'Leckerli One', cursive;
+	text-align: center;
+	font-size: 8rem;
+	color: #44C0BF;
+	margin-bottom: 40px;
+}
+
+#turnglobe{
+	text-align: center;
+}
+
+#worldmap {
+	margin:0 auto;
+}
+
+#worldmap svg {
+	background: #44C0BF;
+	border-radius: 200px;
+	box-shadow:0 0 10px rgba(0,0,0,0.4);
+}
+
+.land {
+	fill: white;
 }
