@@ -8,6 +8,7 @@ app.config(function($stateProvider){
 });
 
 app.controller('TourCtrl', function($scope){
+	// var audio = document.getElementById('audio');
 	$scope.tourData = {
 		creator: 'hello',
 		name : 'Katrina Euro Trip',
@@ -16,7 +17,7 @@ app.controller('TourCtrl', function($scope){
 			{
 				latitude: 40.701929,
 				longitude: -73.983912,
-				audioUrl : '',
+				audioUrl : 'https://s3.amazonaws.com/angelhack2015-audio-tour/testaudio.mp3',
 				imagesUrl : [
 					'http://www.ripleys.com/wp-content/uploads/2013/11/Snoopybabe3-550x550.jpg',
 					'http://holykaw.alltop.com/wp-content/uploads/2013/10/snoopybabe-cute-sad-cat-4-500x372.jpg',
@@ -26,7 +27,7 @@ app.controller('TourCtrl', function($scope){
 			{
 				latitude: 50.701929,
 				longitude: -83.983912,
-				audioUrl : '',
+				audioUrl : 'https://s3.amazonaws.com/angelhack2015-audio-tour/testaudio2.mp3',
 				imagesUrl : [
 					'http://urbanblog.pairsite.com/files/Boo_photo1.JPG',
 					'http://images5.fanpop.com/image/photos/31600000/Boo-Buddy-333-boo-and-buddy-31665381-960-720.jpg',
@@ -46,28 +47,65 @@ app.controller('TourCtrl', function($scope){
 		]
 	};
 
+	//show and hiding images and map view
 	$scope.show = false;
-
 	$scope.showPics = function(){
 		$scope.show = !$scope.show;
-		console.log('SHOW');
 	}
 
+	// updateInterval(audio, $scope.tourData.points[0].imagesUrl);
 	$scope.interval = 5000;
 	$scope.slides = $scope.tourData.points[0].imagesUrl;
+	$scope.current = $scope.tourData.points[0].audioUrl;
 
 	$scope.$on('slideShow', function(event, data){
-		
 		for(var i = 0; i < $scope.tourData.points.length; i++){
 			if($scope.tourData.points[i].latitude === data.latitude && $scope.tourData.points[i].longitude === data.longitude) {
 				$scope.images = $scope.tourData.points[i].imagesUrl;
 				$scope.slides = $scope.images;
+
+				// $scope.current = $scope.tourData.points[i].audioUrl;
+				// audio.load();
+				// audio.play();
+
 				$scope.$broadcast('pointChanged', {index: i});
+				// updateInterval(audio, $scope.tourData.points[i].imagesUrl);
 				break;
 			}
 		}
 	});
 
+	// function updateInterval(htmlNode, imgArr){
+	// 	$scope.interval = htmlNode.duration * 1000 / imgArr.length;
+	// }
+
+	$scope.$on('tourPause', function(event){
+		$scope.$broadcast('tourPause');
+	});
+
+	$scope.$on('tourPlay', function(event){
+		$scope.$broadcast('tourPlay');
+	});
+
+	$scope.$on('tourNext', function(event){
+		$scope.$broadcast('tourNext');
+	});
+
+	$scope.$on('tourRewind', function(event){
+		$scope.$broadcast('tourRewind');
+	});
+
+	$scope.$on('tourIsEnded', function(event){
+		$scope.$broadcast('tourIsEnded');
+	});
+
+	$scope.$on('tourIsPlaying', function(event){
+		$scope.$broadcast('tourIsPlaying');
+	});
+
+	$scope.$on('tourIsPaused', function(event){
+		$scope.$broadcast('tourIsPaused');
+	});
 });
 
 app.factory('TourFactory', function($http){
