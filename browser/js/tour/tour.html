@@ -5,7 +5,7 @@
 		<div class='col-md-8' ng-show='show'>
 			<carousel interval="interval">
 			  <slide ng-repeat="slide in slides">
-			    <img ng-src="{{slide}}" style="margin:auto; height:100%">
+			    <img src="{{slide | trusted}}" style="margin:auto; height:100%">
 			  </slide>
 			</carousel>
 		</div>
