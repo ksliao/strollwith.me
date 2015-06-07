@@ -1,6 +1,6 @@
 <div class='tourDiv'>
 	<div class='row'>
-		<audiotour ng-model='tourData.points' preload></audiotour>
+		<audiotour ng-model='tourData.points'></audiotour>
 
 		<div class='col-md-8' ng-show='show'>
 			<carousel interval="interval">
@@ -19,7 +19,7 @@
 				<span ng-hide='show'>Show Images</span>
 				<span ng-show='show'>Show Map</span>
 			</button>
-			<sidepane ng-model='tourData.points' class='inline center'></sidepane>
+			<sidepane ng-model='tourData.points' name='tourData.name' description='tourData.description' creator='tourData.creator' class='inline center'></sidepane>
 		</div>
 
 	</div>
