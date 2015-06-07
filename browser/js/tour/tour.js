@@ -69,10 +69,6 @@ app.controller('TourCtrl', function($scope, TourFactory){
 				$scope.images = $scope.tourData.points[i].imagesUrl;
 				$scope.slides = $scope.images;
 
-				// $scope.current = $scope.tourData.points[i].audioUrl;
-				// audio.load();
-				// audio.play();
-
 				$scope.$broadcast('pointChanged', {index: i});
 				// updateInterval(audio, $scope.tourData.points[i].imagesUrl);
 				break;
