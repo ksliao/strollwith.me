@@ -41,3 +41,37 @@ text-align: center;
 .land {
 	fill: white;
 }
+
+.quote{
+	text-align: center;
+	margin: 0 auto;
+	width: 44%;
+	margin-top: 40px;
+}
+
+.left{
+	text-align: left;
+}
+
+.right{
+	text-align: right;
+}
+
+#left-quote{
+	
+}
+
+#right-quote{
+	float: right;
+	text-align: right;
+}
+
+section{
+	height: 100vh;
+	padding: 40px;
+}
+
+#section-quote{
+	background: #44C0BF;
+	color: white;
+}
