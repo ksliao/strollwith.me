@@ -1,6 +1,7 @@
 <div>
 	<input type='text'>
 	<div class='tours'>
-		<div></div>
+		<pre>{{tours | json}}</pre>
+		<listing ng-repeat='tour in tours' ng-model='tour'></listing>
 	</div>
 </div>

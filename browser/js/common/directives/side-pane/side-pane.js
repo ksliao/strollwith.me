@@ -4,15 +4,12 @@ app.directive('sidepane', function(){
 		replace: true,
 		templateUrl : 'js/common/directives/side-pane/side-pane.html',
 		scope: {
-			stories: '=ngModel'
+			stories: '=ngModel',
+			name : '=',
+			description : '=',
+			creator : '='
 		},
 		link : function(scope, element, attribute){
-			var playButton = $('#play');
-			var rewindButton = $('#rewind');
-			var pauseButton = $('#pause');
-			var forwardButton = $('#forward');
-			var stopButton = $('#stop');
-
 			scope.activatedButton = 'stop';
 
 			scope.index = 0;

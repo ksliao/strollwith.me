@@ -6,24 +6,22 @@ var MyClient = require('idol-client')({
   autoResult: true });
 var cps = require("cps-api");
 var cpsConn = require("../../../db").cpsConn;
+
 function S4() {
   //use this to generate random ID
   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
 }
 
 
-
-
-
 router.get('/', function(req, res){
 
   // var doc = {name: "yes", location: "no"};
-  var list_req = new cps.ListLastRequest({}, 0, 2);
+  var list_req = new cps.ListLastRequest({}, 0, 20);
   cpsConn.sendRequest(list_req, function (err, list_resp) {
      if (err) return console.log(err);
      console.log("JSON INFO", list_resp);
      res.send(list_resp.results.document)
-  }, 'json');  
+  }, 'json');
 
 
 
@@ -78,8 +76,17 @@ router.post('/', function(req, res){
 
 });
 
-router.get('/:id', function(req, res){
-
+router.get('/:id', function(req, res, next){
+  var cpsId = req.params.id;
+  console.log(req.params.id);
+  var retrieve_req = new cps.RetrieveRequest(cpsId);
+  cpsConn.sendRequest(retrieve_req, function (err, retrieve_resp) {
+     if (err) return next(err);
+     if (retrieve_resp) {
+        console.log(retrieve_resp.results.document[0]);
+        res.json(retrieve_resp.results.document[0]);
+     }
+  }, 'json');
 });
 
 router.put('/:id', function(req, res){

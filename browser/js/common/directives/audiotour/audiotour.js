@@ -39,18 +39,16 @@ app.directive('audiotour', function(){
 			});
 
 			element.on('play', _.debounce(function(){
-					scope.$emit('tourIsPlaying');
-				}, 3000, {
-					leading: false,
-					trailing: true
+					return scope.$emit('tourIsPlaying');
+				}, 100000, {
+					leading: true
 				})
 			);
 
 			element.on('pause', _.debounce(function(){
-					scope.$emit('tourIsPaused');
-				}, 3000, {
-					leading : false,
-					trailing: true
+					return scope.$emit('tourIsPaused');
+				}, 100000, {
+					leading: true
 				})
 			);
 
