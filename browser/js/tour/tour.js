@@ -4,13 +4,6 @@ app.config(function($stateProvider){
 		url : '/tour/:id',
 		templateUrl : 'js/tour/tour.html',
 		controller: 'TourCtrl'
-		// resolve : {
-		// 	tourData : function($stateParams, $state, TourFactory){
-		// 		return TourFactory.findTour($stateParams.id).catch(function(){
-		// 			$state.go('home');
-		// 		});
-		// 	}
-		// }
 	});
 });
 
@@ -53,18 +46,17 @@ app.controller('TourCtrl', function($scope){
 		]
 	};
 
+	$scope.show = false;
+
+	$scope.showPics = function(){
+		$scope.show = !$scope.show;
+		console.log('SHOW');
+	}
+
 	$scope.interval = 5000;
 	$scope.slides = $scope.tourData.points[0].imagesUrl;
 
 	$scope.$on('slideShow', function(event, data){
-		
-		// $scope.POI = $scope.tourData.points.filter(function(points){
-		// 	return (points.latitude === data.latitude && points.longitude === data.longitude);
-		// })[0];
-
-		// $scope.images = $scope.POI.imagesUrl;
-		// $scope.slides = $scope.images;
-
 		
 		for(var i = 0; i < $scope.tourData.points.length; i++){
 			if($scope.tourData.points[i].latitude === data.latitude && $scope.tourData.points[i].longitude === data.longitude) {
@@ -74,23 +66,7 @@ app.controller('TourCtrl', function($scope){
 				break;
 			}
 		}
-		// console.log('DATA', data);
-		// console.log('POI', $scope.POI);
-		// console.log('IMAGES', $scope.images);
 	});
-
-	// $scope.addSlide = function(imageUrl) {
-	// 	console.log('ADD IMAGE HERE');
-	//     var newWidth = 600 + slides.length + 1;
-	//     slides.push({
-	//       image: imageUrl + newWidth + '/300'
-	//       // text: ['More','Extra','Lots of','Surplus'][slides.length % 4] + ' ' +
-	//       //   ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
-	//     });
-	//   };
-	//   for (var i=0; i<4; i++) {
-	//     $scope.addSlide();
-	//   }
 
 });
 
