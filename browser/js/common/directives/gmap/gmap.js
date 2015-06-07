@@ -5,7 +5,7 @@ app.directive('gmap', function(){
 		require: 'ngModel',
 		templateUrl: 'js/common/directives/gmap/gmap.html',
 		link: function(scope, element, attribute){
-			console.dir(scope.plan);
+			
 			function openInfo(infowindow, map, marker){
 				return function(){
 					infowindow.open(map, marker);
@@ -18,17 +18,29 @@ app.directive('gmap', function(){
 				}
 			}
 
+			function openDetails(marker){
+				return function(){
+					var markerPosition = marker.getPosition();
+					var markerCoords = {};
+					markerCoords.latitude = Math.round(markerPosition.A*1000000)/1000000;
+					markerCoords.longitude = Math.round(markerPosition.F*1000000)/1000000;
+					console.log(markerCoords);
+					scope.$emit('slideShow', markerCoords);
+				}
+			}
+
 			function initialize() {
 		        var mapOptions = {
 				    zoom: 3,
 				    center: new google.maps.LatLng(60, -90),
-				    mapTypeId: google.maps.MapTypeId.ROADMAP
+				    mapTypeId: google.maps.MapTypeId.ROADMAP,
+				    styles: [{"featureType":"landscape.natural.landcover","elementType":"geometry.fill","stylers":[{"hue":"#ff0000"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#44c0bf"}]}]
 				  };
 
 				  var map = new google.maps.Map(document.getElementById('map-canvas'),
 				      mapOptions);
 
-				  var tourCoordinates = scope.plan.map(function(el){
+				  var tourCoordinates = scope.tourData.points.map(function(el){
 				  	return new google.maps.LatLng(el.latitude, el.longitude);
 				  });
 
@@ -44,7 +56,6 @@ app.directive('gmap', function(){
 
 				  	var marker = new google.maps.Marker({
 					    position: el,
-					    draggable: true,
 					    animation: google.maps.Animation.DROP,
 					    clickable: true,
 					    title:"Point " + index
@@ -54,7 +65,7 @@ app.directive('gmap', function(){
 						content: '<p>' + marker.title + '</p>'
 					});
 
-					google.maps.event.addListener(marker, 'click', openInfo(infowindow, map, marker));
+					google.maps.event.addListener(marker, 'click', openDetails(marker));
 					google.maps.event.addListener(marker, 'mouseover', openInfo(infowindow, map, marker));
 					google.maps.event.addListener(marker, 'mouseout', closeInfo(infowindow, map, marker));
 
