@@ -15,4 +15,7 @@ app.config(function($stateProvider){
 
 app.controller('ToursAllController', function($scope, toursData){
 	$scope.tours = toursData;
+	$scope.search = {
+		query: ''
+	}
 });

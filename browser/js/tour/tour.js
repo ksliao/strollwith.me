@@ -54,7 +54,6 @@ app.controller('TourCtrl', function($scope, tourData){
 	// 	]
 	// };
 	$scope.tourData = tourData;
-	console.log($scope.tourData);
 
 	//show and hiding images and map view
 	$scope.show = false;
@@ -85,31 +84,31 @@ app.controller('TourCtrl', function($scope, tourData){
 	// }
 
 	$scope.$on('tourPause', function(event){
-		$scope.$broadcast('tourPause');
+		$scope.$broadcast('tourPauseS');
 	});
 
 	$scope.$on('tourPlay', function(event){
-		$scope.$broadcast('tourPlay');
+		$scope.$broadcast('tourPlayS');
 	});
 
 	$scope.$on('tourNext', function(event){
-		$scope.$broadcast('tourNext');
+		$scope.$broadcast('tourNextS');
 	});
 
 	$scope.$on('tourRewind', function(event){
-		$scope.$broadcast('tourRewind');
+		$scope.$broadcast('tourRewindS');
 	});
 
 	$scope.$on('tourIsEnded', function(event){
-		$scope.$broadcast('tourIsEnded');
+		$scope.$broadcast('tourIsEndedS');
 	});
 
 	$scope.$on('tourIsPlaying', function(event){
-		$scope.$broadcast('tourIsPlaying');
+		$scope.$broadcast('tourIsPlayingS');
 	});
 
 	$scope.$on('tourIsPaused', function(event){
-		$scope.$broadcast('tourIsPaused');
+		$scope.$broadcast('tourIsPausedS');
 	});
 });
 

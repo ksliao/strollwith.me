@@ -1,7 +1,8 @@
 <div>
-	<input type='text'>
+	<div>
+		<input type='text' ng-model='search.query'>
+	</div>
 	<div class='tours'>
-		<pre>{{tours | json}}</pre>
-		<listing ng-repeat='tour in tours' ng-model='tour'></listing>
+		<listing ng-repeat='tour in tours | wild:search.query' ng-model='tour'></listing>
 	</div>
 </div>
