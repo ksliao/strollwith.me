@@ -1,15 +1,16 @@
 <div>
+	<sidepane ng-model='tourData.points'></sidepane>
+
   <div style="width: 66%;">
     <carousel interval="interval">
-      <slide ng-repeat="slide in slides" active="slide.active">
-        <img ng-src="{{slide.image}}" style="margin:auto; height:100%">
+      <slide ng-repeat="slide in slides">
+        <img ng-src="{{slide}}" style="margin:auto; height:100%">
       </slide>
     </carousel>
   </div>
-</div>
 
-<div>
-	<gmap ng-model='plan'></gmap>
+  <gmap ng-model='tourData.points'></gmap>
+  
 	<style>
 		#map-canvas{
 			height: 100vh;
