@@ -17,8 +17,6 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
 
             scope.user = null;
 
-            console.log("$", $window.sessionStorage.length);
-
             // scope.cartCount = $window.sessionStorage.length;
 
             scope.isLoggedIn = function () {
