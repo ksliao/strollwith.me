@@ -7,6 +7,14 @@ app.directive('sidepane', function(){
 			stories: '=ngModel'
 		},
 		link : function(scope, element, attribute){
+			var playButton = $('#play');
+			var rewindButton = $('#rewind');
+			var pauseButton = $('#pause');
+			var forwardButton = $('#forward');
+			var stopButton = $('#stop');
+
+			scope.activatedButton = 'stop';
+
 			scope.index = 0;
 			scope.showing = scope.stories[scope.index];
 
@@ -17,15 +25,17 @@ app.directive('sidepane', function(){
 			});
 
 			scope.$on('tourIsPlaying', function(){
-				console.log('tour is playing');
+				scope.activatedButton = 'play';
 			});
 
 			scope.$on('tourIsPaused', function(){
 				console.log('tour is paused');
+				scope.activatedButton = 'pause';
 			});
 
 			scope.$on('tourIsEnded', function(){
 				console.log('tour is ended');
+				scope.activatedButton = 'stop';
 			});
 
 			scope.playTour = function(){

@@ -2,7 +2,6 @@
 var router = require('express').Router();
 module.exports = router;
 
-router.use('/tutorial', require('./tutorial'));
 router.use('/members', require('./members'));
 router.use('/tours', require('./tours'));
 router.use('/speech-recognition', require('./speech-recognition'));
