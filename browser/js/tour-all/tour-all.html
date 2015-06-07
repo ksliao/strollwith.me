@@ -1,6 +1,6 @@
 <div>
 	<div>
-		<input type='text' ng-model='search.query'>
+		<input type='text' placeholder='Search with me...' class='form-control' ng-model='search.query'>
 	</div>
 	<div class='tours'>
 		<listing ng-repeat='tour in tours | wild:search.query' ng-model='tour'></listing>
