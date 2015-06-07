@@ -3,11 +3,18 @@ app.config(function($stateProvider){
 	$stateProvider.state('tour', {
 		url : '/tour/:id',
 		templateUrl : 'js/tour/tour.html',
-		controller: 'TourCtrl'
+		controller: 'TourCtrl',
+		resolve : {
+			tourData : function(TourFactory, $state, $stateParams){
+				return TourFactory.findTour($stateParams.id).catch(function(){
+					$state.go('home');
+				});
+			}
+		}
 	});
 });
 
-app.controller('TourCtrl', function($scope, TourFactory){
+app.controller('TourCtrl', function($scope, tourData){
 	// var audio = document.getElementById('audio');
 	// $scope.tourData = {
 	// 	creator: 'hello',
@@ -46,11 +53,7 @@ app.controller('TourCtrl', function($scope, TourFactory){
 	// 		}
 	// 	]
 	// };
-	//$scope.tourData = {};
-	TourFactory.findAllTours().then(function(tour){
-		console.log("WE HEREEEE", tour)
-		$scope.tourData = tour[0];
-	})
+	$scope.tourData = tourData;
 
 	//show and hiding images and map view
 	$scope.show = false;
@@ -81,31 +84,31 @@ app.controller('TourCtrl', function($scope, TourFactory){
 	// }
 
 	$scope.$on('tourPause', function(event){
-		$scope.$broadcast('tourPause');
+		$scope.$broadcast('tourPauseS');
 	});
 
 	$scope.$on('tourPlay', function(event){
-		$scope.$broadcast('tourPlay');
+		$scope.$broadcast('tourPlayS');
 	});
 
 	$scope.$on('tourNext', function(event){
-		$scope.$broadcast('tourNext');
+		$scope.$broadcast('tourNextS');
 	});
 
 	$scope.$on('tourRewind', function(event){
-		$scope.$broadcast('tourRewind');
+		$scope.$broadcast('tourRewindS');
 	});
 
 	$scope.$on('tourIsEnded', function(event){
-		$scope.$broadcast('tourIsEnded');
+		$scope.$broadcast('tourIsEndedS');
 	});
 
 	$scope.$on('tourIsPlaying', function(event){
-		$scope.$broadcast('tourIsPlaying');
+		$scope.$broadcast('tourIsPlayingS');
 	});
 
 	$scope.$on('tourIsPaused', function(event){
-		$scope.$broadcast('tourIsPaused');
+		$scope.$broadcast('tourIsPausedS');
 	});
 });
 
@@ -117,6 +120,7 @@ app.factory('TourFactory', function($http){
 			});
 		},
 		findTour : function(id){
+			console.log(id);
 			return $http.get('api/tours/' + id).then(function(response){
 				return response.data;
 			});

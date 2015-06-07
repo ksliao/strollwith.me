@@ -7,12 +7,15 @@
 		<button id='stop' class='{{activatedButton | activated:"stop"}}'><span class='glyphicon glyphicon-stop'></span></button>
 	</div>
 	<div class='description'>
+		<h4>{{name}}</h4>
+		<h5>{{creator}}</h5>
+		<p>{{description}}</p>
 		<p>{{showing.latitude}}, {{showing.longitude}}</p>
 	</div>
 	<div ng-controller="CartController">
 		<button type="button" class="btn btn-primary" ng-click="addToCart()">Add To Cart</button>
 	</div>
 	<div class='audiotext'>
-		<p ng-repeat='story in stories'></p>
+		<p ng-repeat='story in stories'>{{story.audioText}}</p>
 	</div>
 </div>

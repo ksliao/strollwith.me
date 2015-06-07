@@ -16,19 +16,19 @@ app.directive('audiotour', function(){
 				playAudio(newIndex.index);
 			});
 
-			scope.$on('tourPause', function(event){
+			scope.$on('tourPauseS', function(event){
 				audio.pause();
 			});
 
-			scope.$on('tourPlay', function(event){
+			scope.$on('tourPlayS', function(event){
 				audio.play();
 			});
 
-			scope.$on('tourNext', function(event){
+			scope.$on('tourNextS', function(event){
 				if(scope.index < scope.stories.length) playAudio(scope.index + 1);
 			});
 
-			scope.$on('tourRewind', function(event){
+			scope.$on('tourRewindS', function(event){
 				console.log('nextTour');
 				if(scope.index > 0) playAudio(scope.index - 1);
 			});
@@ -39,18 +39,16 @@ app.directive('audiotour', function(){
 			});
 
 			element.on('play', _.debounce(function(){
-					scope.$emit('tourIsPlaying');
-				}, 3000, {
-					leading: false,
-					trailing: true
+					return scope.$emit('tourIsPlaying');
+				}, 100000, {
+					leading: true
 				})
 			);
 
 			element.on('pause', _.debounce(function(){
-					scope.$emit('tourIsPaused');
-				}, 3000, {
-					leading : false,
-					trailing: true
+					return scope.$emit('tourIsPaused');
+				}, 100000, {
+					leading: true
 				})
 			);
 

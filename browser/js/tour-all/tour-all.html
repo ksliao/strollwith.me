@@ -1,6 +1,8 @@
 <div>
-	<input type='text'>
+	<div>
+		<input type='text' ng-model='search.query'>
+	</div>
 	<div class='tours'>
-		<div></div>
+		<listing ng-repeat='tour in tours | wild:search.query' ng-model='tour'></listing>
 	</div>
 </div>
