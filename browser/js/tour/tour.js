@@ -60,21 +60,21 @@ app.controller('TourCtrl', function($scope, TourFactory){
 
 	// updateInterval(audio, $scope.tourData.points[0].imagesUrl);
 	$scope.interval = 5000;
-	$scope.slides = $scope.tourData.points[0].imagesUrl;
-	$scope.current = $scope.tourData.points[0].audioUrl;
+	// $scope.slides = $scope.tourData.points[0].imagesUrl;
+	// $scope.current = $scope.tourData.points[0].audioUrl;
 
-	$scope.$on('slideShow', function(event, data){
-		for(var i = 0; i < $scope.tourData.points.length; i++){
-			if($scope.tourData.points[i].latitude === data.latitude && $scope.tourData.points[i].longitude === data.longitude) {
-				$scope.images = $scope.tourData.points[i].imagesUrl;
-				$scope.slides = $scope.images;
+	// $scope.$on('slideShow', function(event, data){
+	// 	for(var i = 0; i < $scope.tourData.points.length; i++){
+	// 		if($scope.tourData.points[i].latitude === data.latitude && $scope.tourData.points[i].longitude === data.longitude) {
+	// 			$scope.images = $scope.tourData.points[i].imagesUrl;
+	// 			$scope.slides = $scope.images;
 
-				$scope.$broadcast('pointChanged', {index: i});
-				// updateInterval(audio, $scope.tourData.points[i].imagesUrl);
-				break;
-			}
-		}
-	});
+	// 			$scope.$broadcast('pointChanged', {index: i});
+	// 			// updateInterval(audio, $scope.tourData.points[i].imagesUrl);
+	// 			break;
+	// 		}
+	// 	}
+	// });
 
 	// function updateInterval(htmlNode, imgArr){
 	// 	$scope.interval = htmlNode.duration * 1000 / imgArr.length;

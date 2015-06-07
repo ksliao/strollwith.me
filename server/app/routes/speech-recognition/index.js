@@ -12,11 +12,11 @@ router.get('/', function (req, res){
 	     method: 'POST',
 	     type: 'async',
 	     parameters: {
-	         url: 'myUrl'
+	         file: 'myFiles'
 	         // interval: //seconds
 	     },
-	     urls: {
-	         myUrl: "https://s3.amazonaws.com/angelhack2015-audio-tour/testaudio.mp3" // See IDOL supported files.
+	     files: {
+	         myFiles: __dirname + "/audio4.m4a" // See IDOL supported files.
 	     }
 	 }).then(
 	     function(res){

@@ -1,11 +1,13 @@
 'use strict';
-app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) {
+app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, $window) {
 
     return {
         restrict: 'E',
         scope: {},
         templateUrl: 'js/common/directives/navbar/navbar.html',
         link: function (scope) {
+
+            $rootScope.cart = $window.sessionStorage.length;
 
             scope.items = [
                 { label: 'Home', state: 'home' },
@@ -14,6 +16,10 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
             ];
 
             scope.user = null;
+
+            console.log("$", $window.sessionStorage.length);
+
+            // scope.cartCount = $window.sessionStorage.length;
 
             scope.isLoggedIn = function () {
                 return AuthService.isAuthenticated();

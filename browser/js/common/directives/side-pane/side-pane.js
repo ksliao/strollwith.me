@@ -53,6 +53,10 @@ app.directive('sidepane', function(){
 			scope.prevPoi = function(){
 				scope.$emit('tourRewind');
 			}
+
+			scope.addToCart = function() {
+				
+			}
 		}
 	}
 });
