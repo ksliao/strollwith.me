@@ -24,6 +24,7 @@ app.directive('gmap', function(){
 					var markerCoords = {};
 					markerCoords.latitude = Math.round(markerPosition.A*1000000)/1000000;
 					markerCoords.longitude = Math.round(markerPosition.F*1000000)/1000000;
+					console.log(markerCoords);
 					scope.$emit('slideShow', markerCoords);
 				}
 			}
@@ -32,13 +33,14 @@ app.directive('gmap', function(){
 		        var mapOptions = {
 				    zoom: 3,
 				    center: new google.maps.LatLng(60, -90),
-				    mapTypeId: google.maps.MapTypeId.ROADMAP
+				    mapTypeId: google.maps.MapTypeId.ROADMAP,
+				    styles: [{"featureType":"landscape.natural.landcover","elementType":"geometry.fill","stylers":[{"hue":"#ff0000"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#44c0bf"}]}]
 				  };
 
 				  var map = new google.maps.Map(document.getElementById('map-canvas'),
 				      mapOptions);
 
-				  var tourCoordinates = scope.plan.map(function(el){
+				  var tourCoordinates = scope.tourData.points.map(function(el){
 				  	return new google.maps.LatLng(el.latitude, el.longitude);
 				  });
 

@@ -4,13 +4,6 @@ app.config(function($stateProvider){
 		url : '/tour/:id',
 		templateUrl : 'js/tour/tour.html',
 		controller: 'TourCtrl'
-		// resolve : {
-		// 	tourData : function($stateParams, $state, TourFactory){
-		// 		return TourFactory.findTour($stateParams.id).catch(function(){
-		// 			$state.go('home');
-		// 		});
-		// 	}
-		// }
 	});
 });
 
@@ -25,21 +18,9 @@ app.controller('TourCtrl', function($scope){
 				longitude: -73.983912,
 				audioUrl : '',
 				imagesUrl : [
-					{
-						image: 'http://www.ripleys.com/wp-content/uploads/2013/11/Snoopybabe3-550x550.jpg',
-						active: false
-					},
-					{
-						image: 'http://holykaw.alltop.com/wp-content/uploads/2013/10/snoopybabe-cute-sad-cat-4-500x372.jpg',
-						active: false
-					},
-					{
-						image: 'https://s-media-cache-ak0.pinimg.com/736x/af/7f/a2/af7fa28b2eada5402933713b6399d08e.jpg',
-						active: false
-					}
-					// 'http://www.ripleys.com/wp-content/uploads/2013/11/Snoopybabe3-550x550.jpg',
-					// 'http://holykaw.alltop.com/wp-content/uploads/2013/10/snoopybabe-cute-sad-cat-4-500x372.jpg',
-					// 'https://s-media-cache-ak0.pinimg.com/736x/af/7f/a2/af7fa28b2eada5402933713b6399d08e.jpg'
+					'http://www.ripleys.com/wp-content/uploads/2013/11/Snoopybabe3-550x550.jpg',
+					'http://holykaw.alltop.com/wp-content/uploads/2013/10/snoopybabe-cute-sad-cat-4-500x372.jpg',
+					'https://s-media-cache-ak0.pinimg.com/736x/af/7f/a2/af7fa28b2eada5402933713b6399d08e.jpg'
 				]
 			},
 			{
@@ -65,43 +46,27 @@ app.controller('TourCtrl', function($scope){
 		]
 	};
 
-	$scope.plan = $scope.tourData.points.map(function(el){
-		return {
-			latitude : el.latitude,
-			longitude : el.longitude
-		}
-	});
+	$scope.show = false;
+
+	$scope.showPics = function(){
+		$scope.show = !$scope.show;
+		console.log('SHOW');
+	}
 
 	$scope.interval = 5000;
 	$scope.slides = $scope.tourData.points[0].imagesUrl;
 
 	$scope.$on('slideShow', function(event, data){
 		
-		$scope.POI = $scope.tourData.points.filter(function(points){
-			console.log('POINTS', points);
-			return (points.latitude === data.latitude && points.longitude === data.longitude);
-		});
-
-		$scope.images = $scope.POI[0].imagesUrl;
-		$scope.slides = $scope.images;
-		
-		// console.log('DATA', data);
-		// console.log('POI', $scope.POI);
-		// console.log('IMAGES', $scope.images);
+		for(var i = 0; i < $scope.tourData.points.length; i++){
+			if($scope.tourData.points[i].latitude === data.latitude && $scope.tourData.points[i].longitude === data.longitude) {
+				$scope.images = $scope.tourData.points[i].imagesUrl;
+				$scope.slides = $scope.images;
+				$scope.$broadcast('pointChanged', {index: i});
+				break;
+			}
+		}
 	});
-
-	// $scope.addSlide = function(imageUrl) {
-	// 	console.log('ADD IMAGE HERE');
-	//     var newWidth = 600 + slides.length + 1;
-	//     slides.push({
-	//       image: imageUrl + newWidth + '/300'
-	//       // text: ['More','Extra','Lots of','Surplus'][slides.length % 4] + ' ' +
-	//       //   ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
-	//     });
-	//   };
-	//   for (var i=0; i<4; i++) {
-	//     $scope.addSlide();
-	//   }
 
 });
 
