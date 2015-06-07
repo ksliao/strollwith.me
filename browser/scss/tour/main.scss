@@ -19,5 +19,36 @@
 }
 
 .tourDiv{
-	padding: 0px 20px;
+	padding: 20px;
+}
+
+#side-panel{
+	border: 1px solid grey;
+	padding: 15px;
+
+}
+
+.col-md-4{
+	min-width: 32.5%;
+	max-width: 33.33%;
+}
+
+.col-md-8{
+	padding-left: 5px;
+}
+.row{
+	margin: 0 auto;
+	padding-top: 5px;
+}
+
+.inline{
+	display: inline;
+}
+
+.center{
+	text-align: center;
+}
+
+.space-right{
+	margin-right: 20px;
 }
