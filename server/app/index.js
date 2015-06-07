@@ -3,13 +3,8 @@ var path = require('path');
 var express = require('express');
 var app = express();
 module.exports = app;
-var cps = require("cps-api");
-var cpsConn = require("../db").cpsConn;
 
-function S4() {
-    //use this to generate random ID
-    return (((1+Math.random())*0x10000)|0).toString(16).substring(1); 
-}
+
 
 // Pass our express application pipeline into the configuration
 // function located at server/app/configure/index.js
@@ -37,20 +32,6 @@ app.use(function (req, res, next) {
 });
 
 app.get('/*', function (req, res) {
-    console.log("inserting to clusterpoint from app/index.js get /");
-
-
-    
-    var guid = (S4() + S4() + "-" + S4() + "-4" + S4().substr(0,3) + "-" + S4() + "-" + S4() + S4() + S4()).toLowerCase();
-
-    // Insert
-    var id = guid,
-       name = "test";
-    var insert_request = new cps.InsertRequest('<document><id>'+id+'</id>'+cps.Term(name, "name")+'</document>');
-    cpsConn.sendRequest(insert_request, function(err, insert_response) {
-       if (err) return console.error(err);
-       console.log('New user registered: ' + insert_response.document.id);
-    });
 
     res.sendFile(app.get('indexHTMLPath'));
 });
